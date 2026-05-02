@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Protein Meal Plan — Indian, South Asian & Italian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F3EE;
+  --warm-white:#FDFAF6;
+  --ink:#1A1714;
+  --ink-light:#4A443E;
+  --ink-faint:#9A928A;
+  --accent-rust:#C4541A;
+  --accent-sage:#4A7C59;
+  --accent-teal:#1D7070;
+  --accent-gold:#B8860B;
+  --border:#E2DAD0;
+  --card-bg:#FFFFFF;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.65;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:var(--ink);
+  color:var(--cream);
+  padding:4rem 2rem 3rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(196,84,26,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 80% 30%, rgba(74,124,89,0.12) 0%, transparent 60%);
+}
+header::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff' fill-opacity='0.04'/%3E%3C/svg%3E");
+  background-size:60px 60px;
+}
+.header-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.header-kicker{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(247,243,238,0.55);
+  margin-bottom:1.2rem;
+}
+header h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,5vw,3.4rem);
+  font-weight:700;
+  line-height:1.15;
+  color:var(--cream);
+  margin-bottom:1rem;
+}
+header h1 em{
+  font-style:italic;
+  color:rgba(196,84,26,0.85);
+}
+.header-sub{
+  font-size:15px;
+  font-weight:300;
+  color:rgba(247,243,238,0.7);
+  max-width:520px;
+  margin:0 auto 2rem;
+}
+.header-stats{
+  display:flex;
+  justify-content:center;
+  gap:2.5rem;
+  flex-wrap:wrap;
+}
+.stat{text-align:center}
+.stat-val{
+  font-family:'Playfair Display',serif;
+  font-size:1.9rem;
+  font-weight:600;
+  color:var(--cream);
+  line-height:1;
+}
+.stat-lbl{
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(247,243,238,0.45);
+  margin-top:3px;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(247,243,238,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+}
+.nav-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:0;
+}
+.nav-btn{
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.04em;
+  padding:1rem 1.4rem;
+  border:none;
+  background:transparent;
+  color:var(--ink-faint);
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.nav-btn:hover{color:var(--ink)}
+.nav-btn.active{color:var(--accent-rust);border-bottom-color:var(--accent-rust)}
+
+/* ===== LAYOUT ===== */
+.container{max-width:1100px;margin:0 auto;padding:3rem 2rem}
+section{display:none}
+section.active{display:block}
+
+/* ===== SECTION HEADERS ===== */
+.section-head{
+  display:flex;
+  align-items:baseline;
+  gap:1rem;
+  margin-bottom:2.5rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+.section-head h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  font-weight:600;
+}
+.section-head p{
+  font-size:13px;
+  color:var(--ink-faint);
+}
+
+/* ===== RECIPE FILTERS ===== */
+.filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:2rem;
+}
+.filter-btn{
+  font-size:12px;
+  font-weight:500;
+  padding:6px 14px;
+  border-radius:100px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--ink-light);
+  cursor:pointer;
+  transition:all .15s;
+  letter-spacing:.03em;
+}
+.filter-btn:hover{border-color:var(--ink-light)}
+.filter-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* ===== RECIPE GRID ===== */
+.recipes-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+.recipe-card{
+  background:var(--card-bg);
+  padding:1.5rem;
+  cursor:pointer;
+  transition:background .15s;
+  position:relative;
+}
+.recipe-card:hover{background:#FAFAF8}
+.card-cuisine-bar{
+  height:3px;
+  border-radius:2px;
+  margin-bottom:1rem;
+}
+.card-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:.5rem;
+  margin-bottom:.6rem;
+}
+.tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:4px;
+}
+.tag-indian{background:#FEF3E2;color:#92400E}
+.tag-southasian{background:#E6F4F1;color:#0F5F5F}
+.tag-italian{background:#FEF0EF;color:#9B2335}
+.tag-vegan{background:#F0F7EE;color:#2D6A2D}
+.tag-vegetarian{background:#F4F0FA;color:#5B3A8A}
+.recipe-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  font-weight:600;
+  line-height:1.3;
+  margin-bottom:.4rem;
+}
+.recipe-intro{
+  font-size:13px;
+  color:var(--ink-light);
+  line-height:1.55;
+  margin-bottom:.8rem;
+}
+.macros-row{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:.6rem;
+}
+.macro{display:flex;flex-direction:column}
+.macro-val{font-size:1.1rem;font-weight:500;line-height:1}
+.macro-lbl{font-size:10px;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+.cal-val{color:var(--accent-rust)}
+.pro-val{color:var(--accent-teal)}
+.protein-bar-wrap{background:#EEE9E2;border-radius:2px;height:3px;margin:.4rem 0 .2rem}
+.protein-bar-fill{height:3px;border-radius:2px;background:var(--accent-teal);transition:width .6s ease}
+.bar-label{font-size:10px;color:var(--ink-faint)}
+.expand-toggle{
+  font-size:11px;
+  font-weight:500;
+  color:var(--accent-rust);
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  margin-top:.8rem;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.expand-icon{
+  display:inline-block;
+  transition:transform .2s;
+  font-style:normal;
+}
+.recipe-card.open .expand-icon{transform:rotate(180deg)}
+
+/* ===== RECIPE DETAIL ===== */
+.recipe-detail{
+  display:none;
+  margin-top:1.2rem;
+  padding-top:1.2rem;
+  border-top:1px solid var(--border);
+}
+.recipe-card.open .recipe-detail{display:block}
+.detail-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+}
+@media(max-width:520px){.detail-cols{grid-template-columns:1fr}}
+.detail-label{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:.5rem;
+  padding-bottom:.3rem;
+  border-bottom:1px solid var(--border);
+}
+.ing-list{list-style:none;padding:0}
+.ing-list li{
+  font-size:12.5px;
+  color:var(--ink-light);
+  padding:3px 0;
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+}
+.ing-list li::before{content:"·";color:var(--border);flex-shrink:0;margin-top:1px}
+.steps{list-style:none;padding:0;counter-reset:step}
+.steps li{
+  font-size:12.5px;
+  color:var(--ink-light);
+  padding:4px 0 4px 1.5rem;
+  position:relative;
+  line-height:1.5;
+}
+.steps li::before{
+  counter-increment:step;
+  content:counter(step);
+  position:absolute;left:0;
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  color:var(--accent-rust);
+  font-weight:400;
+  top:6px;
+}
+.nut-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  margin-top:1rem;
+}
+.nut-cell{
+  background:var(--cream);
+  border-radius:6px;
+  padding:8px;
+  text-align:center;
+}
+.nut-cell-val{font-size:1rem;font-weight:500}
+.nut-cell-lbl{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-top:2px}
+
+/* ===== WEEK PLAN ===== */
+.week-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  margin-bottom:2rem;
+}
+@media(max-width:700px){.week-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:420px){.week-grid{grid-template-columns:repeat(2,1fr)}}
+.day-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:.8rem .7rem;
+}
+.day-name{
+  font-family:'DM Mono',monospace;
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:.6rem;
+  padding-bottom:.4rem;
+  border-bottom:1px solid var(--border);
+}
+.meal-slot{margin-bottom:.5rem}
+.meal-slot:last-child{margin-bottom:0}
+.meal-type{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:2px;
+}
+.meal-recipe-name{
+  font-size:11px;
+  line-height:1.35;
+  color:var(--ink);
+}
+.meal-cuisine-dot{
+  width:5px;height:5px;
+  border-radius:50%;
+  display:inline-block;
+  margin-right:4px;
+  vertical-align:middle;
+}
+.week-legend{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:1.5rem;
+  padding:.8rem 1rem;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+.leg-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--ink-light);
+}
+.leg-dot{width:8px;height:8px;border-radius:50%}
+.week-summary{
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:12px;
+  padding:1.5rem 2rem;
+  margin-top:1rem;
+}
+.week-summary h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  margin-bottom:1rem;
+  font-weight:600;
+}
+.summary-stats{display:flex;gap:2rem;flex-wrap:wrap}
+.sumstat{text-align:center}
+.sumstat-val{font-size:1.5rem;font-weight:500;font-family:'Playfair Display',serif}
+.sumstat-lbl{font-size:11px;color:rgba(247,243,238,0.5);letter-spacing:.05em;text-transform:uppercase}
+.sumstat-note{font-size:11px;color:rgba(247,243,238,0.4);margin-top:1rem;line-height:1.5}
+
+/* ===== GROCERY ===== */
+.grocery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:12px;
+}
+.grocery-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.2rem 1.25rem;
+}
+.grocery-card-head{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  margin-bottom:.8rem;
+  padding-bottom:.6rem;
+  border-bottom:1px solid var(--border);
+}
+.grocery-icon{font-size:15px}
+.grocery-card-head h3{
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.02em;
+}
+.grocery-items{list-style:none;padding:0}
+.grocery-items li{
+  font-size:12.5px;
+  padding:4px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  color:var(--ink-light);
+}
+.grocery-items li:last-child{border-bottom:none}
+.grocery-qty{
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  color:var(--ink-faint);
+  white-space:nowrap;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.recipe-card,.day-card,.grocery-card{
+  animation:fadeUp .3s ease both;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:3rem 2rem;
+  border-top:1px solid var(--border);
+  font-size:12px;
+  color:var(--ink-faint);
+}
+footer strong{color:var(--ink)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  header{padding:2.5rem 1.25rem 2rem}
+  .container{padding:2rem 1.25rem}
+  nav{padding:0 1rem}
+  .nav-btn{padding:.8rem .9rem;font-size:12px}
+  .section-head{flex-direction:column;gap:.3rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="header-kicker">Vegan · Vegetarian · High-Protein</p>
+    <h1>Eat Well,<br><em>Every Day</em></h1>
+    <p class="header-sub">12 recipes from Indian, South Asian & Italian kitchens — built around 40g protein per serving, under 650 calories.</p>
+    <div class="header-stats">
+      <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">Recipes</div></div>
+      <div class="stat"><div class="stat-val">~40g</div><div class="stat-lbl">Protein / serving</div></div>
+      <div class="stat"><div class="stat-val">7</div><div class="stat-lbl">Day plan</div></div>
+      <div class="stat"><div class="stat-val">&lt;650</div><div class="stat-lbl">kcal max</div></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="switchTab('recipes',this)">Recipes</button>
+    <button class="nav-btn" onclick="switchTab('week',this)">Weekly Plan</button>
+    <button class="nav-btn" onclick="switchTab('grocery',this)">Grocery List</button>
+  </div>
+</nav>
+
+<!-- RECIPES -->
+<section id="sec-recipes" class="active">
+<div class="container">
+  <div class="section-head">
+    <h2>The Recipes</h2>
+    <p>Click any card to expand full ingredients &amp; method</p>
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter-btn active" onclick="filterRecipes('all',this)">All recipes</button>
+    <button class="filter-btn" onclick="filterRecipes('Indian',this)">Indian</button>
+    <button class="filter-btn" onclick="filterRecipes('South Asian',this)">South Asian</button>
+    <button class="filter-btn" onclick="filterRecipes('Italian',this)">Italian</button>
+    <button class="filter-btn" onclick="filterRecipes('vegan',this)">Vegan only</button>
+    <button class="filter-btn" onclick="filterRecipes('vegetarian',this)">Vegetarian only</button>
+  </div>
+  <div class="recipes-grid" id="recipes-grid"></div>
+</div>
+</section>
+
+<!-- WEEKLY PLAN -->
+<section id="sec-week">
+<div class="container">
+  <div class="section-head">
+    <h2>Weekly Meal Plan</h2>
+    <p>A default 7-day rotation — lunch &amp; dinner, three cuisines</p>
+  </div>
+  <div class="week-legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#92400E"></div>Indian</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#0F5F5F"></div>South Asian</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#9B2335"></div>Italian</div>
+  </div>
+  <div class="week-grid" id="week-grid"></div>
+  <div class="week-summary">
+    <h3>Weekly nutrition averages</h3>
+    <div class="summary-stats">
+      <div class="sumstat"><div class="sumstat-val">~1,180</div><div class="sumstat-lbl">kcal / day</div></div>
+      <div class="sumstat"><div class="sumstat-val">~76g</div><div class="sumstat-lbl">protein / day</div></div>
+      <div class="sumstat"><div class="sumstat-val">~120g</div><div class="sumstat-lbl">carbs / day</div></div>
+      <div class="sumstat"><div class="sumstat-val">~28g</div><div class="sumstat-lbl">fat / day</div></div>
+    </div>
+    <p class="sumstat-note">Covers lunch + dinner only. Add a protein-rich breakfast — oats with protein powder, Greek yoghurt with fruit, or eggs — to reach your full daily targets. All figures are per two-meal day.</p>
+  </div>
+</div>
+</section>
+
+<!-- GROCERY -->
+<section id="sec-grocery">
+<div class="container">
+  <div class="section-head">
+    <h2>Grocery List</h2>
+    <p>One person · one week · organised for a single supermarket run</p>
+  </div>
+  <div class="grocery-grid" id="grocery-grid"></div>
+</div>
+</section>
+
+<footer>
+  <p>Recipes designed for <strong>40g protein · under 650 kcal</strong> per serving. Nutritional values are estimates. Adjust portions to your individual needs.</p>
+  <p style="margin-top:.5rem">Primary proteins: paneer · tofu · tempeh · chickpeas · sprouted moong · soya chunks · lentils · white beans</p>
+</footer>
+
+<script>
+const C={indian:'#92400E',southasian:'#0F5F5F',italian:'#9B2335'};
+const recipes=[
+{id:1,name:"Palak Paneer with Quinoa",cuisine:"Indian",diet:"vegetarian",cal:580,protein:42,carbs:48,fat:18,fiber:9,
+intro:"Velvety spinach gravy loaded with golden paneer cubes, served over protein-rich quinoa instead of rice.",
+ingredients:["250g paneer, cubed","300g fresh spinach","1 cup quinoa (dry, ~185g)","1 medium onion, finely chopped","3 garlic cloves","1 inch fresh ginger","2 tomatoes, chopped","1 tsp cumin seeds","1 tsp garam masala","½ tsp turmeric","½ tsp chilli powder","1 tsp neutral oil","2 tbsp low-fat Greek yoghurt","Salt to taste"],
+steps:["Cook quinoa in 2 cups salted water until fluffy (15 min). Set aside.","Blanch spinach 2 min in boiling water, drain and blend smooth.","Sauté cumin in oil; add onion, garlic, ginger until golden (8 min).","Add tomatoes, turmeric, chilli, salt. Cook until oil separates (8 min).","Stir in spinach purée and garam masala. Simmer 5 min.","Fold in paneer cubes and yoghurt. Heat gently 3 min without boiling.","Serve over quinoa."]},
+
+{id:2,name:"Sri Lankan Sprouted Moong & Tempeh Bowl",cuisine:"South Asian",diet:"vegan",cal:520,protein:41,carbs:52,fat:11,fiber:14,
+intro:"A warm Sri Lankan-spiced bowl: crunchy sprouts, crispy tempeh, and a toasted coconut-chilli finish.",
+ingredients:["180g tempeh, sliced","1½ cups sprouted moong beans","½ cup cooked brown rice","1 green chilli, sliced","2 spring onions, sliced","½ cup grated unsweetened coconut","1 tsp mustard seeds","8 curry leaves","½ tsp turmeric","1 tsp chilli flakes","Juice of 1 lime","1 tsp coconut oil","Salt to taste"],
+steps:["Pan-fry tempeh on a dry non-stick pan with turmeric and salt, 5 min per side until golden. Set aside.","Heat coconut oil; splutter mustard seeds, add curry leaves.","Add chilli flakes, green chilli and sprouted moong. Stir-fry 4 min.","Remove from heat. Fold in grated coconut, spring onions and lime juice.","Serve tempeh over brown rice, topped with moong mixture."]},
+
+{id:3,name:"Pakistani Chana Dal & Soya Chunk Khichdi",cuisine:"South Asian",diet:"vegan",cal:545,protein:43,carbs:62,fat:9,fiber:13,
+intro:"A hearty one-pot comfort dish — chana dal and basmati rice lifted with chewy soya chunks and warming whole spices.",
+ingredients:["¾ cup chana dal, soaked 1 hr","½ cup basmati rice","80g soya chunks, rehydrated in hot water","1 onion, thinly sliced","2 garlic cloves","1 tsp cumin seeds","1 tsp coriander powder","½ tsp turmeric","1 tsp chilli powder","2 bay leaves","1 tsp ghee or coconut oil","Fresh coriander and lime to serve","Salt to taste"],
+steps:["Soak chana dal 1 hr; drain. Soak soya chunks in hot water 20 min; squeeze well.","Heat ghee in a pressure cooker. Fry onion until deep golden (12 min).","Add garlic, cumin, bay leaves, coriander, turmeric and chilli. Sauté 2 min.","Add dal, rice, soya chunks, salt and 3 cups water.","Pressure cook 3 whistles or simmer covered 30 min until soft.","Garnish with coriander and a squeeze of lime."]},
+
+{id:4,name:"Miso-Glazed Tempeh & Edamame Risotto",cuisine:"Italian",diet:"vegan",cal:610,protein:40,carbs:70,fat:14,fiber:10,
+intro:"Creamy arborio risotto with umami miso-glazed tempeh and edamame — Italian in soul, Japanese in accent.",
+ingredients:["160g tempeh","¾ cup arborio rice","1 cup frozen edamame, shelled","1 shallot, minced","2 garlic cloves","2½ cups hot vegetable stock","½ cup dry white wine (or extra stock)","1 tbsp white miso paste","2 tbsp nutritional yeast","1 tsp olive oil","Fresh parsley","Salt and black pepper"],
+steps:["Mix miso with 1 tbsp water. Brush over tempeh. Pan-fry on a dry non-stick pan 3 min per side. Slice into strips.","Sauté shallot and garlic in olive oil 3 min.","Add arborio rice; toast 1 min. Deglaze with wine.","Add hot stock one ladle at a time, stirring and allowing absorption (~20 min total).","Stir in edamame and nutritional yeast. Season.","Top with tempeh strips and fresh parsley."]},
+
+{id:5,name:"Tuscan White Bean & Cavolo Nero Pasta",cuisine:"Italian",diet:"vegan",cal:560,protein:38,carbs:78,fat:10,fiber:16,
+intro:"Half the cannellini beans are blended into a silky sauce that clings to wholewheat spaghetti, finished with wilted cavolo nero.",
+ingredients:["90g wholewheat spaghetti (dry)","400g can cannellini beans, drained","3 large cavolo nero leaves (or kale)","3 garlic cloves","½ lemon, zested and juiced","1 tsp olive oil","500ml vegetable stock","½ tsp chilli flakes","2 tbsp nutritional yeast","1 sprig fresh rosemary","Salt and black pepper"],
+steps:["Cook pasta al dente; reserve ½ cup pasta water.","Sauté garlic and chilli in olive oil 1 min. Add rosemary.","Add beans and stock. Simmer 8 min; remove rosemary.","Blend half the beans smooth; return to pan for a creamy sauce.","Stir in pasta water and cavolo nero; cook 3 min until wilted.","Toss in pasta. Add nutritional yeast, lemon zest and juice. Season well."]},
+
+{id:6,name:"Bangladeshi Masoor Dal with Pan-Fried Tofu",cuisine:"South Asian",diet:"vegan",cal:510,protein:40,carbs:55,fat:12,fiber:12,
+intro:"A Bangladeshi-style red lentil dal enriched with golden tofu, finished with a sharp mustard oil and panch phoron tarka.",
+ingredients:["¾ cup red lentils (masoor dal)","200g firm tofu, cubed","1 onion","3 garlic cloves","2 tomatoes","1 tsp mustard oil","½ tsp panch phoron (or nigella + cumin)","½ tsp turmeric","1 green chilli","Fresh coriander and lemon juice","Serve with 80g cooked rice","Salt to taste"],
+steps:["Cook lentils in 2½ cups water with turmeric until very soft (15 min).","Pan-fry tofu cubes on a dry non-stick pan until golden. Set aside.","Heat mustard oil until smoking; splutter panch phoron.","Add onion, garlic, tomatoes, green chilli. Cook until soft (8 min).","Stir in cooked lentils. Simmer 5 min; adjust consistency.","Add tofu, lemon juice and salt. Garnish with coriander. Serve over rice."]},
+
+{id:7,name:"Double-Protein Paneer & Chickpea Tikka Masala",cuisine:"Indian",diet:"vegetarian",cal:620,protein:44,carbs:54,fat:19,fiber:11,
+intro:"Chargrilled paneer meets whole chickpeas in a smoky, luscious tikka masala — served with a modest portion of basmati.",
+ingredients:["200g paneer, cubed","200g cooked chickpeas (canned, drained)","2 onions","3 garlic cloves, grated","1 inch ginger, grated","3 tomatoes or 200g passata","1 tbsp tikka masala paste","½ cup low-fat Greek yoghurt (for marinade)","1 tsp garam masala","1 tsp Kashmiri chilli powder","1 tsp cumin","1 tsp oil","Fresh coriander","80g cooked basmati to serve"],
+steps:["Marinate paneer in yoghurt, Kashmiri chilli and half the tikka paste for 30 min.","Grill or pan-fry paneer until charred at edges. Set aside.","Blend onion, garlic, ginger to paste. Cook in oil until golden (10 min).","Add remaining tikka paste, cumin, tomatoes. Cook thick (10 min).","Add chickpeas and ½ cup water. Simmer 8 min.","Fold in grilled paneer and garam masala. Simmer 3 min. Serve over rice."]},
+
+{id:8,name:"Vietnamese Lemongrass Tofu Noodle Bowl",cuisine:"South Asian",diet:"vegan",cal:490,protein:38,carbs:58,fat:12,fiber:8,
+intro:"A bún-style bowl with caramelised lemongrass tofu, cool rice noodles, fresh herbs and a punchy lime-chilli dressing.",
+ingredients:["300g firm tofu, pressed and cubed","80g rice vermicelli noodles","1 lemongrass stalk, white part minced","2 garlic cloves, minced","1 tbsp low-sodium soy sauce","1 tbsp lime juice","1 tsp agave or brown sugar","1 tsp chilli flakes","½ cup shredded lettuce","½ cucumber, julienned","Fresh mint and coriander","1 tsp sesame oil","30g crushed peanuts"],
+steps:["Mix soy sauce, lime, agave, chilli, lemongrass and garlic. Marinate tofu 30 min.","Pan-fry marinated tofu in sesame oil on medium-high until golden all sides (~8 min).","Cook rice vermicelli per packet; rinse under cold water.","Arrange noodles in a bowl with lettuce, cucumber and herbs.","Top with caramelised tofu and drizzle remaining marinade as dressing.","Scatter with crushed peanuts and extra lime wedge."]},
+
+{id:9,name:"Lentil & Ricotta Lasagne",cuisine:"Italian",diet:"vegetarian",cal:640,protein:42,carbs:65,fat:18,fiber:14,
+intro:"Brown lentils take the place of meat in this generous lasagne — layered with part-skim ricotta and a light béchamel.",
+ingredients:["6 wholewheat lasagne sheets","1 cup green or brown lentils, cooked","250g part-skim ricotta","250ml passata","1 onion, diced","2 garlic cloves","1 carrot, finely diced","2 tsp Italian mixed herbs","Salt and black pepper","Béchamel: 1 tbsp plain flour, 1 cup skimmed milk, ½ tsp nutmeg","40g parmesan, grated","1 tsp olive oil"],
+steps:["Sauté onion, garlic and carrot in olive oil until soft (8 min). Add lentils, passata and herbs. Simmer 15 min.","Make béchamel: whisk flour with cold milk; heat stirring until thick. Add nutmeg and salt.","Mix ricotta with half the parmesan, salt and pepper.","In a baking dish, layer: lentil sauce → lasagne sheets → ricotta → béchamel. Repeat; finish with parmesan.","Bake at 190 °C for 35 min until golden and bubbling.","Rest 10 min before slicing."]},
+
+{id:10,name:"Chickpea & Spinach Risotto",cuisine:"Italian",diet:"vegan",cal:590,protein:38,carbs:74,fat:12,fiber:13,
+intro:"Blended chickpeas form a silky, naturally creamy base for this satisfying risotto — finished with wilted spinach and lemon.",
+ingredients:["¾ cup arborio rice","400g can chickpeas, drained","150g baby spinach","1 shallot, minced","3 garlic cloves","2½ cups hot vegetable stock","½ cup dry white wine or extra stock","3 tbsp nutritional yeast","1 tsp olive oil","Zest of ½ lemon","Salt, black pepper, chilli flakes","Fresh parsley and basil"],
+steps:["Blend half the chickpeas with ½ cup stock until smooth. Set aside whole chickpeas.","Sauté shallot and garlic in olive oil 2 min.","Add arborio; toast 1 min. Add wine.","Add stock gradually while stirring (18–20 min total).","Stir in blended chickpeas, whole chickpeas, nutritional yeast and lemon zest.","Fold in spinach until wilted. Season and garnish."]},
+
+{id:11,name:"Sprouted Moong & Paneer Curry",cuisine:"Indian",diet:"vegetarian",cal:550,protein:43,carbs:44,fat:20,fiber:10,
+intro:"Two protein powerhouses — fresh sprouts and golden paneer — in a light, ginger-forward tomato gravy. Serve with one roti.",
+ingredients:["200g paneer, cubed","1½ cups sprouted moong beans","2 tomatoes, blended","1 onion","3 garlic cloves","1 inch ginger","1 tsp cumin seeds","1 tsp coriander powder","½ tsp turmeric","1 tsp garam masala","½ tsp chilli powder","1 tsp oil","Salt to taste","2 wholewheat roti to serve"],
+steps:["Boil sprouted moong until just tender (5–7 min). Drain.","Sauté cumin in oil; add onion until golden. Add garlic and ginger.","Add blended tomatoes, turmeric, coriander and chilli. Cook until thick (10 min).","Add sprouted moong and ½ cup water. Simmer 5 min.","Add paneer and garam masala. Simmer 3 min.","Serve with warm roti."]},
+
+{id:12,name:"Bangladeshi Soya Chunk Dum Biryani",cuisine:"South Asian",diet:"vegan",cal:570,protein:40,carbs:72,fat:10,fiber:9,
+intro:"A fragrant layered biryani with spiced soya chunks — the dum method seals in aroma and makes it deeply satisfying.",
+ingredients:["100g soya chunks (dry), rehydrated and squeezed","1½ cups basmati rice, soaked 30 min","1 onion, thinly sliced","3 garlic cloves, grated","1 inch ginger, grated","2 tomatoes","Whole spices: 2 bay leaves, 4 cardamoms, 1 cinnamon stick, 4 cloves","1 tsp biryani masala","½ tsp turmeric","½ cup soy yoghurt (or low-fat dairy yoghurt)","1 tsp oil","Fresh mint and coriander","Pinch saffron in 2 tbsp warm water (optional)"],
+steps:["Marinate soya chunks in yoghurt, biryani masala, garlic-ginger paste and salt for 1 hour.","Fry onion in oil until deep golden (15 min — do not rush). Reserve half for topping.","Cook soya masala with remaining onion, tomatoes and whole spices until dry. Set aside.","Par-cook soaked rice in well-salted boiling water until 70% done; drain.","Layer in a heavy pot: soya masala → rice → saffron water → mint → reserved fried onion. Seal tightly with foil.","Cook on lowest heat (dum) 20 min. Rest 5 min. Serve layered."]},
+];
+
+const weekPlan=[
+{day:"Mon",lunch:1,lc:'indian',dinner:4,dc:'italian'},
+{day:"Tue",lunch:6,lc:'southasian',dinner:9,dc:'italian'},
+{day:"Wed",lunch:7,lc:'indian',dinner:5,dc:'italian'},
+{day:"Thu",lunch:2,lc:'southasian',dinner:11,dc:'indian'},
+{day:"Fri",lunch:3,lc:'southasian',dinner:10,dc:'italian'},
+{day:"Sat",lunch:12,lc:'southasian',dinner:8,dc:'southasian'},
+{day:"Sun",lunch:11,lc:'indian',dinner:9,dc:'italian'},
+];
+
+const grocery=[
+{section:"Proteins & Dairy",icon:"🥚",items:[["Paneer","700g"],["Firm tofu","900g"],["Tempeh","540g (3×180g)"],["Part-skim ricotta","250g"],["Low-fat Greek yoghurt","400g"],["Parmesan, grated","40g"]]},
+{section:"Legumes & Pulses",icon:"🫘",items:[["Red lentils (masoor dal)","500g"],["Chana dal","300g"],["Green/brown lentils","300g"],["Cannellini beans, canned","2 × 400g tins"],["Chickpeas, canned","2 × 400g tins"],["Soya chunks (dry)","200g"],["Sprouted moong beans","300g"]]},
+{section:"Grains & Pasta",icon:"🌾",items:[["Basmati rice","800g"],["Brown rice","300g"],["Quinoa","300g"],["Arborio rice","400g"],["Wholewheat spaghetti","200g"],["Wholewheat lasagne sheets","9 sheets"],["Rice vermicelli noodles","200g"]]},
+{section:"Vegetables",icon:"🥬",items:[["Fresh spinach / baby spinach","600g"],["Cavolo nero or kale","200g"],["Tomatoes (or passata)","1 kg + 250ml passata"],["Onions","1 kg"],["Shallots","3"],["Carrots","3 medium"],["Cucumber","1"],["Garlic","3 bulbs"],["Fresh ginger root","150g piece"],["Green chillies","6"],["Spring onions","1 bunch"],["Lemongrass stalks","2"]]},
+{section:"Herbs & Garnishes",icon:"🌿",items:[["Fresh coriander","2 bunches"],["Fresh mint","1 bunch"],["Fresh parsley","1 bunch"],["Fresh basil","1 bunch"],["Curry leaves (fresh or dried)","1 pack"]]},
+{section:"Spices",icon:"🫙",items:[["Cumin seeds","50g"],["Coriander powder","50g"],["Turmeric powder","30g"],["Garam masala","40g"],["Kashmiri chilli powder","30g"],["Chilli flakes","20g"],["Mustard seeds","20g"],["Panch phoron","1 small pack"],["Biryani masala","1 small pack"],["Tikka masala paste","1 jar"],["Italian mixed herbs","1 jar"],["Cardamom, cinnamon sticks, cloves","small packs"],["Nutmeg (ground)","1 jar"]]},
+{section:"Pantry Staples",icon:"🧴",items:[["Vegetable stock","2 litres / 8 cubes"],["Passata","500ml"],["Nutritional yeast","100g pack"],["White miso paste","1 small jar"],["Low-sodium soy sauce","1 bottle"],["Coconut oil","small jar"],["Olive oil","250ml bottle"],["Sesame oil","small bottle"],["Agave syrup or brown sugar","small"],["Dry white wine","500ml (or extra stock)"],["Frozen edamame (shelled)","200g"],["Unsalted crushed peanuts","100g"],["Desiccated coconut (unsweetened)","100g"],["Lemons","4"],["Limes","4"],["Saffron threads (optional)","1 small packet"]]},
+];
+
+function getR(id){return recipes.find(r=>r.id===id)}
+
+function cuisineClass(c){
+  if(c==='Indian')return 'indian';
+  if(c==='South Asian')return 'southasian';
+  return 'italian';
+}
+
+function renderRecipes(filter){
+  const grid=document.getElementById('recipes-grid');
+  const list=recipes.filter(r=>{
+    if(filter==='all')return true;
+    if(filter==='vegan')return r.diet==='vegan';
+    if(filter==='vegetarian')return r.diet==='vegetarian';
+    return r.cuisine===filter;
+  });
+  grid.innerHTML=list.map((r,i)=>`
+<div class="recipe-card" id="rc${r.id}" onclick="toggleCard(${r.id})" style="animation-delay:${i*30}ms">
+  <div class="card-cuisine-bar" style="background:${C[cuisineClass(r.cuisine)]}"></div>
+  <div class="card-meta">
+    <div class="tags">
+      <span class="tag tag-${cuisineClass(r.cuisine)}">${r.cuisine}</span>
+      <span class="tag tag-${r.diet}">${r.diet}</span>
+    </div>
+  </div>
+  <h3>${r.name}</h3>
+  <p class="recipe-intro">${r.intro}</p>
+  <div class="macros-row">
+    <div class="macro"><span class="macro-val cal-val">${r.cal}</span><span class="macro-lbl">kcal</span></div>
+    <div class="macro"><span class="macro-val pro-val">${r.protein}g</span><span class="macro-lbl">protein</span></div>
+    <div class="macro"><span class="macro-val">${r.carbs}g</span><span class="macro-lbl">carbs</span></div>
+    <div class="macro"><span class="macro-val">${r.fat}g</span><span class="macro-lbl">fat</span></div>
+  </div>
+  <div class="protein-bar-wrap"><div class="protein-bar-fill" style="width:${Math.min(100,Math.round(r.protein/50*100))}%"></div></div>
+  <div class="bar-label">${r.protein}g of 50g protein target</div>
+  <div class="expand-toggle">View recipe <i class="expand-icon">↓</i></div>
+  <div class="recipe-detail">
+    <div class="detail-cols">
+      <div>
+        <div class="detail-label">Ingredients</div>
+        <ul class="ing-list">${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>
+      <div>
+        <div class="detail-label">Method</div>
+        <ol class="steps">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      </div>
+    </div>
+    <div class="nut-grid">
+      <div class="nut-cell"><div class="nut-cell-val" style="color:var(--accent-rust)">${r.cal}</div><div class="nut-cell-lbl">kcal</div></div>
+      <div class="nut-cell"><div class="nut-cell-val" style="color:var(--accent-teal)">${r.protein}g</div><div class="nut-cell-lbl">protein</div></div>
+      <div class="nut-cell"><div class="nut-cell-val">${r.carbs}g</div><div class="nut-cell-lbl">carbs</div></div>
+      <div class="nut-cell"><div class="nut-cell-val">${r.fat}g</div><div class="nut-cell-lbl">fat · ${r.fiber}g fiber</div></div>
+    </div>
+  </div>
+</div>`).join('');
+}
+
+function toggleCard(id){
+  document.getElementById('rc'+id).classList.toggle('open');
+}
+
+function filterRecipes(f,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderRecipes(f);
+}
+
+function renderWeek(){
+  const grid=document.getElementById('week-grid');
+  grid.innerHTML=weekPlan.map(d=>{
+    const l=getR(d.lunch);
+    const dn=getR(d.dinner);
+    return `<div class="day-card">
+      <div class="day-name">${d.day}</div>
+      <div class="meal-slot">
+        <div class="meal-type" style="color:${C[d.lc]}">Lunch</div>
+        <div class="meal-recipe-name"><span class="meal-cuisine-dot" style="background:${C[d.lc]}"></span>${l.name}</div>
+      </div>
+      <div class="meal-slot">
+        <div class="meal-type" style="color:${C[d.dc]}">Dinner</div>
+        <div class="meal-recipe-name"><span class="meal-cuisine-dot" style="background:${C[d.dc]}"></span>${dn.name}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderGrocery(){
+  const grid=document.getElementById('grocery-grid');
+  grid.innerHTML=grocery.map(g=>`
+<div class="grocery-card">
+  <div class="grocery-card-head">
+    <span class="grocery-icon">${g.icon}</span>
+    <h3>${g.section}</h3>
+  </div>
+  <ul class="grocery-items">
+    ${g.items.map(([n,q])=>`<li><span>${n}</span><span class="grocery-qty">${q}</span></li>`).join('')}
+  </ul>
+</div>`).join('');
+}
+
+function switchTab(name,btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderRecipes('all');
+renderWeek();
+renderGrocery();
+</script>
+</body>
+</html>
